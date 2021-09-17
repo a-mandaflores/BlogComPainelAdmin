@@ -4,6 +4,11 @@
 <div class="container">
     <hr>
     <h2>Categorias</h2>
+    <a href="/admin/categories/new">
+    <button class="btn btn-success">
+        Criar nova categoria
+    </button>
+    </a>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -15,18 +20,18 @@
             </tr>
         </thead>
         <tbody>
-            <th>1</th>
-            <th>Dwv Web</th>
-            <th>dev-web</th>
-            <th></th>
-            
-        </tbody>
-        <tbody>
-            <th>1</th>
-            <th>Dwv Web</th>
-            <th>dev-web</th>
-            <th></th>
-            
+        <% categories.forEach(category => { %> 
+            <tr>
+                <th><%=category.id%></th>
+                <th><%=category.title%></th>
+                <th><%=category.slug%></th>
+                <th>
+                    <button class="btn btn-warning">Editar</button>
+                    <button class="btn btn-danger">Deletar</button>
+
+                </th>
+            </tr>    
+        <% }) %>
         </tbody>
     </table>
 </div>
