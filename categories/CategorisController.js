@@ -3,6 +3,13 @@ const router = express.Router();
 const Category = require('./Category')
 const slugify = require('slugify')
 
+router.get('/admin/categories', (req, res) =>{
+    Category.findAll().then(categories => {
+        res.render('admin/categories', {categories: categories})
+    })
+    
+})
+
 router.get('/admin/categories/new', (req, res) =>{
     res.render("admin/categories/new")
 })
@@ -23,10 +30,10 @@ router.post('/save', (req, res) =>{
     }
 })
 
-router.get('/admin/categories', (req, res) =>{
+router.get('/admin/articles/new', (req, res) =>{
     
     Category.findAll().then(categories =>{
-        res.render('admin/categories/index', {categories: categories})
+        res.render('admin/articles/new', {categories: categories})
     })   
 
 })
