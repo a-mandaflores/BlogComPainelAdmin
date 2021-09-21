@@ -66,12 +66,15 @@ router.get('/admin/articles/edit/:id', (req, res) => {
     }
 
     Article.findByPk(id).then(articles => {
+
         if(articles != undefined){
-            res.render('admin/articles/edit', {articles: articles})
+            Category.findAll().then(categories => {
+            res.render('admin/articles/edit', {categories: categories, articles: articles})
+            })
         }else{
         res.redirect('/admin/articles')
         }
-    }).catch(error => {
+    }).catch(err => {
         res.redirect('/admin/articles')
     })
 })
@@ -80,8 +83,10 @@ router.post('/articles/edit/save', (req, res) => {
     var id = req.body.id
     var title = req.body.title
     var body = req.body.content
+    var category = req.body.category
+    
 
-    Article.update({title: title, slug: slugify(title), body: body}, {
+    Article.update({title: title, slug: slugify(title), body: body, categoryId: category}, {
             where:{ 
                 id: id
             }

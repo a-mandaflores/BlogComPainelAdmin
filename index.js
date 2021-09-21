@@ -17,6 +17,9 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
+app.use('/', CategoriesControllers)
+app.use('/', articlesControllers)
+
 connection
     .authenticate()
     .then(()=>{
@@ -82,7 +85,6 @@ app.get('/category/:slug', (req, res) => {
     })
 })
 
-app.use('/', CategoriesControllers)
-app.use('/', articlesControllers)
+
 
 app.listen(8000, () => {console.log('O servidor esta rodando')})
