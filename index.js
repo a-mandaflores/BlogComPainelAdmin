@@ -22,7 +22,7 @@ app.use(express.static('public'))
 
 
 app.use(session({
-    secret: 'skdjfnkdnndjfknkjsdnfkjsnd', cookie: {maxAge: 30000}
+    secret: 'skdjfnkdnndjfknkjsdnfkjsnd', cookie: {maxAge: 300000000000000}
 })) //usado em baixa escala por que usa a memoria ran do computador
 
 app.use('/', categoriesControllers)
