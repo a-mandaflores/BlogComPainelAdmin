@@ -26,8 +26,10 @@
                 <a href="/" style="float: left" > <<< Prev </a>
 
                 <%}%>
+
+                <% if(result.next){%> 
                 <a href="/articles/page/<% result.prox %>" style="float: right;">Next >>></a>
-                
+                <%}%>
             </div>
         </div>
         <hr>
