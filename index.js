@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const connection = require('./database/database')
+const session = require('express-session')
 
 const app = express()
 
@@ -19,6 +20,11 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
+
+app.use(session({
+    secret: 'skdjfnkdnndjfknkjsdnfkjsnd', cookie: {maxAge: 30000}
+})) //usado em baixa escala por que usa a memoria ran do computador
+
 app.use('/', categoriesControllers)
 app.use('/', articlesControllers)
 app.use('/', userControllers)
@@ -30,6 +36,23 @@ connection
     }).catch((error) =>{
         console.log(error)
     })
+
+app.get('/session', (req, res) => {
+    req.session.treinamento = "Formação Node"
+    req.session.ano = 2021
+    req.session.email = "nanda.hamandadesouza@gmail"
+
+    res.send('Tudo certo')
+
+})
+
+app.get('/leitura', (req, res) => {
+    res.json({
+        treinamento: req.session.treinamento,
+        ano: req.session.ano,
+        email: req.session.email
+    })
+})
 
 app.get('/', (req, res) => {
     Article.findAll({
